@@ -40,7 +40,8 @@ class ImageRecognitionApp:
 
         self.model_status_label = tk.Label(self.master, text="Model Yükleniyor...", fg="orange", font=("Helvetica", 10))
         self.model_status_label.pack(pady=5)
-         self.loading_gif_label = tk.Label(self.master)
+        
+        self.loading_gif_label = tk.Label(self.master)
         self.loading_gif_label.pack(pady=5)
         self.loading_gif_label.pack_forget() 
 

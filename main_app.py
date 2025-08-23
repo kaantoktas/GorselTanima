@@ -4,7 +4,6 @@ from PIL import Image, ImageTk
 import os
 import threading 
 import time
-
 from image_recognizer import ImageRecognizer
 from config import ASSETS_DIR, PLACEHOLDER_IMAGE_PATH, LOADING_GIF_PATH, TOP_PREDICTIONS_COUNT
 
@@ -24,8 +23,6 @@ class ImageRecognitionApp:
         self._check_model_loading_status()
 
     def _create_widgets(self):
-        """Uygulamanın GUI elemanlarını oluşturur."""
-
         main_frame = tk.Frame(self.master, padx=10, pady=10)
         main_frame.pack(pady=10, fill="both", expand=True)
 
@@ -104,12 +101,14 @@ class ImageRecognitionApp:
             self.select_button.config(state="normal")
             self.recognize_button.config(state="normal")
             self.loading_gif_label.pack_forget() 
+       
         elif self.recognizer.model_loading:
             self.model_status_label.config(text="Model Yükleniyor...", fg="orange")
             self.select_button.config(state="disabled") 
             self.recognize_button.config(state="disabled")
             self._show_loading_gif() 
             self.master.after(1000, self._check_model_loading_status) 
+        
         else: 
             self.model_status_label.config(text="Model Yüklenemedi! Lütfen konsolu kontrol edin.", fg="red")
             self.select_button.config(state="disabled")
@@ -192,6 +191,7 @@ if __name__ == "__main__":
     if not os.path.exists(PLACEHOLDER_IMAGE_PATH):
         print(f"Uyarı: '{PLACEHOLDER_IMAGE_PATH}' bulunamadı. Lütfen 'assets' klasörüne bir 'placeholder.png' resmi ekleyin.")
         print("Uygulama çalışmaya devam edecek ancak yer tutucu resim görünmeyecektir.")
+    
     if not os.path.exists(LOADING_GIF_PATH):
         print(f"Uyarı: '{LOADING_GIF_PATH}' bulunamadı. Lütfen 'assets' klasörüne bir 'loading.gif' dosyası ekleyin.")
         print("Yükleniyor animasyonu görünmeyecektir.")
